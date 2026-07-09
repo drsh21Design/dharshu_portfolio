@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>d.rsh | Priya Darshini Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0F0F12;
+    --bg-soft:#141418;
+    --bg-card:#18181D;
+    --bg-card-2:#1E1E24;
+    --text:#F4F1EA;
+    --text-dim:#A7A3AD;
+    --line:#2A2A31;
+    --accent:#C6FF3D;
+    --accent-2:#FF7A54;
+    --accent-3:#8C7BFF;
+    --panel:#F6F1EB;
+    --panel-text:#151417;
+    --shadow:0 24px 70px rgba(0,0,0,0.28);
+  }
+  body.light{
+    --bg:#FBF7F1;
+    --bg-soft:#F2EAE1;
+    --bg-card:#FFFFFF;
+    --bg-card-2:#F6EFE8;
+    --text:#171416;
+    --text-dim:#625D66;
+    --line:#E2D8CC;
+    --accent:#86B300;
+    --accent-2:#E86745;
+    --accent-3:#6658D8;
+    --panel:#FFFFFF;
+    --panel-text:#151417;
+    --shadow:0 18px 48px rgba(82,66,50,0.13);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Inter',sans-serif;
+    overflow-x:hidden;
+    transition:background .25s ease,color .25s ease;
+  }
+  ::selection{background:var(--accent); color:#0F0F12;}
+  a{color:inherit; text-decoration:none;}
+  .doodle-font{font-family:'Caveat',cursive;}
+
+  header{
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    display:flex; align-items:center; justify-content:space-between; gap:22px;
+    padding:18px 6vw;
+    backdrop-filter:blur(12px);
+    background:color-mix(in srgb, var(--bg) 78%, transparent);
+    border-bottom:1px solid var(--line);
+  }
+  .logo{
+    font-family:'Space Grotesk','SFMono-Regular','Cascadia Code','Consolas',monospace;
+    font-weight:700; font-size:1.08rem; letter-spacing:0.12em;
+    text-transform:lowercase;
+  }
+  .logo span{color:var(--accent);}
+  nav ul{list-style:none; display:flex; gap:28px; align-items:center;}
+  nav a{font-size:0.92rem; color:var(--text-dim); font-weight:500; transition:color .2s;}
+  nav a:hover{color:var(--text);}
+  .nav-actions{display:flex; align-items:center; gap:12px;}
+  .theme-btn,.copy-email-btn{
+    border:1px solid var(--line); border-radius:999px; font:600 .88rem 'Inter',sans-serif;
+    cursor:pointer; transition:transform .2s ease, border-color .2s ease, background .2s ease;
+  }
+  .theme-btn{
+    background:var(--bg-card); color:var(--text); width:42px; height:42px; padding:0;
+    display:inline-flex; align-items:center; justify-content:center; font-size:1rem;
+  }
+  .theme-btn span{line-height:1;}
+  body.light .theme-btn{background:var(--accent); color:#0F0F12; border-color:var(--accent);}
+  .theme-btn:hover,.copy-email-btn:hover{transform:translateY(-2px); border-color:var(--accent);}
+  .copy-email-btn{background:var(--accent); color:#0F0F12 !important; padding:11px 18px; border-color:var(--accent);}
+
+  section{padding:102px 6vw 74px;}
+  .eyebrow{
+    font-family:'Caveat',cursive; font-size:1.35rem; color:var(--accent);
+    display:inline-block; margin-bottom:10px; transform:rotate(-2deg);
+  }
+
+  .hero{
+    min-height:92vh; display:flex; flex-direction:column; justify-content:center;
+    position:relative; padding-top:104px; padding-bottom:72px;
+  }
+  .hero-grain{
+    position:absolute; inset:0; pointer-events:none; opacity:.9;
+    background-image:
+      radial-gradient(circle at 18% 24%, color-mix(in srgb, var(--accent-3) 14%, transparent), transparent 34%),
+      radial-gradient(circle at 82% 28%, color-mix(in srgb, var(--accent) 10%, transparent), transparent 40%);
+  }
+  body.light .hero-grain{
+    background-image:
+      radial-gradient(circle at 18% 20%, rgba(102,88,216,.10), transparent 34%),
+      radial-gradient(circle at 82% 28%, rgba(134,179,0,.10), transparent 40%);
+  }
+  .hero-inner{position:relative; max-width:1120px;}
+  .hero-tag{
+    font-size:.95rem; color:var(--text-dim); letter-spacing:.08em; text-transform:uppercase;
+    margin-bottom:22px; display:flex; align-items:center; gap:10px; flex-wrap:wrap;
+  }
+  .hero-tag .dot{width:8px; height:8px; border-radius:50%; background:var(--accent); box-shadow:0 0 12px var(--accent); animation:pulse 2s infinite;}
+  @keyframes pulse{0%,100%{opacity:1;} 50%{opacity:.3;}}
+  h1.hero-headline{
+    font-family:'Space Grotesk',sans-serif;
+    font-weight:700;
+    font-size:clamp(2.35rem, 5.6vw, 4.85rem);
+    line-height:1.06;
+    letter-spacing:0;
+    max-width:16ch;
+    position:relative;
+  }
+  .hero-doodle{
+    position:absolute; pointer-events:none; color:var(--accent); opacity:.9;
+  }
+  .hero-doodle.one{width:66px; height:66px; right:8%; top:18%; color:var(--accent);}
+  .hero-doodle.two{width:48px; height:48px; left:-4%; bottom:14%; color:var(--accent-2);}
+  .hero-doodle path{stroke:currentColor; stroke-width:4; fill:none; stroke-linecap:round; stroke-linejoin:round;}
+  .hero-sub{margin-top:26px; font-size:1.08rem; color:var(--text-dim); max-width:58ch; line-height:1.65;}
+  .hero-cta-row{margin-top:34px; display:flex; gap:14px; align-items:center; flex-wrap:wrap;}
+  .btn-primary,.btn-secondary{
+    padding:15px 28px; border-radius:999px; font-weight:600; font-size:.95rem;
+    display:inline-flex; align-items:center; gap:8px; transition:transform .2s ease,border-color .2s ease,background .2s ease,color .2s ease;
+  }
+  .btn-primary{background:var(--text); color:var(--bg);}
+  .btn-primary:hover{background:var(--accent); color:#0F0F12; transform:translateY(-2px);}
+  .btn-secondary{border:1px solid var(--line); color:var(--text);}
+  .btn-secondary:hover{border-color:var(--accent); color:var(--accent); transform:translateY(-2px);}
+  .scroll-hint{position:absolute; bottom:36px; left:6vw; font-size:.85rem; color:var(--text-dim); display:flex; align-items:center; gap:10px;}
+  .scroll-hint .line{width:1px; height:40px; background:linear-gradient(var(--text-dim), transparent); animation:scrolldown 1.8s infinite;}
+  @keyframes scrolldown{0%{transform:scaleY(0); transform-origin:top;} 50%{transform:scaleY(1); transform-origin:top;} 51%{transform-origin:bottom;} 100%{transform:scaleY(0); transform-origin:bottom;}}
+
+  .marquee-wrap{border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding:16px 0; overflow:hidden; white-space:nowrap;}
+  .marquee{display:inline-flex; animation:scroll 28s linear infinite;}
+  .marquee span{font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:1.18rem; color:var(--text-dim); padding:0 20px;}
+  .marquee span.hi{color:var(--accent);}
+  @keyframes scroll{0%{transform:translateX(0);} 100%{transform:translateX(-50%);}}
+
+  .about{display:grid; grid-template-columns:.78fr 1.22fr; gap:56px; align-items:center;}
+  .about-photo{
+    position:relative; border-radius:20px; overflow:hidden; aspect-ratio:4/5;
+    background:var(--bg-card); border:1px solid var(--line); box-shadow:var(--shadow); max-width:390px;
+  }
+  .about-photo img{width:100%; height:100%; object-fit:cover; object-position:50% 24%; filter:saturate(1.03) contrast(1.02);}
+  .about-photo::after{
+    content:""; position:absolute; inset:0;
+    background:linear-gradient(180deg, transparent 58%, rgba(0,0,0,.42));
+    pointer-events:none;
+  }
+  .about-photo .tag-chip{
+    position:absolute; top:18px; left:18px; z-index:2; background:var(--accent); color:#0F0F12;
+    padding:8px 16px; border-radius:999px; font-family:'Caveat',cursive; font-weight:700; font-size:1.2rem;
+    transform:rotate(-4deg);
+  }
+  .about-text h2{font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:clamp(1.65rem,2.6vw,2.3rem); margin-bottom:20px; letter-spacing:0;}
+  .about-text p{color:var(--text-dim); font-size:1rem; line-height:1.7; margin-bottom:16px;}
+  .about-text strong{color:var(--text); font-weight:600;}
+  .quote-note{
+    margin-top:22px; padding:16px 20px; border-left:3px solid var(--accent-2);
+    background:var(--bg-card); border-radius:0 12px 12px 0;
+    font-family:'Caveat',cursive; font-size:1.4rem; color:var(--text);
+  }
+
+  .skills-head{display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:28px; flex-wrap:wrap; gap:20px;}
+  .skills-head h2,.section-title{font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:clamp(1.65rem,2.6vw,2.35rem);}
+  .pill-grid{display:flex; flex-wrap:wrap; gap:12px;}
+  .pill{
+    padding:10px 18px; border-radius:999px; border:1px solid var(--line);
+    font-size:.92rem; color:var(--text-dim); background:var(--bg-card);
+    transition:all .25s ease; cursor:default;
+  }
+  .pill:hover{border-color:var(--accent); color:var(--text); background:var(--bg-card-2); transform:translateY(-3px);}
+  .pill.lead{background:var(--accent); color:#0F0F12; border-color:var(--accent); font-weight:600;}
+
+  .exp-item{display:grid; grid-template-columns:170px 1fr; gap:34px; padding:28px 0; border-top:1px solid var(--line);}
+  .exp-item:last-child{border-bottom:1px solid var(--line);}
+  .exp-date{color:var(--text-dim); font-size:.9rem; padding-top:4px;}
+  .exp-role{font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:1.3rem; margin-bottom:6px;}
+  .exp-company{color:var(--accent); font-weight:500; margin-bottom:10px; display:block;}
+  .exp-desc{color:var(--text-dim); font-size:.98rem; line-height:1.65; max-width:68ch;}
+
+  .projects-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:20px;}
+  .project-card{
+    background:var(--bg-card); border:1px solid var(--line); border-radius:18px;
+    padding:28px; position:relative; overflow:hidden;
+    transition:transform .3s ease,border-color .3s ease; display:flex; flex-direction:column; min-height:230px;
+  }
+  .project-card:hover{transform:translateY(-6px); border-color:var(--accent-3);}
+  .project-card.wide{grid-column:span 2;}
+  .project-tag{font-size:.78rem; letter-spacing:.06em; text-transform:uppercase; color:var(--accent-2); font-weight:600; margin-bottom:14px;}
+  .project-card h3{font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:1.38rem; margin-bottom:12px;}
+  .project-card p{color:var(--text-dim); font-size:.96rem; line-height:1.6; max-width:54ch; flex-grow:1;}
+  .project-link{margin-top:22px; display:inline-flex; align-items:center; gap:8px; font-weight:600; font-size:.9rem; width:fit-content; padding-bottom:2px; border-bottom:1px solid var(--line); transition:gap .2s ease,border-color .2s ease,color .2s ease;}
+  .project-link:hover{gap:14px; border-color:var(--accent); color:var(--accent);}
+  .blob{position:absolute; width:180px; height:180px; border-radius:50%; filter:blur(60px); opacity:.16; top:-60px; right:-60px; pointer-events:none;}
+
+  .beyond-shell{
+    margin-top:28px; background:var(--panel); color:var(--panel-text);
+    border-radius:24px; padding:24px; box-shadow:var(--shadow); overflow:hidden;
+  }
+  .beyond-intro{display:flex; justify-content:space-between; gap:24px; align-items:flex-end; margin-bottom:20px;}
+  .beyond-intro h2{font-family:'Space Grotesk',sans-serif; font-size:clamp(1.6rem,3vw,2.5rem); letter-spacing:0;}
+  .beyond-intro p{color:#6E6872; line-height:1.55; max-width:42ch;}
+  .life-stack{
+    display:flex; gap:10px; height:340px;
+  }
+  .life-card{
+    flex:1; min-width:72px; border-radius:12px; overflow:hidden; position:relative;
+    cursor:pointer; isolation:isolate; transition:flex .45s cubic-bezier(.2,.8,.2,1), transform .3s ease;
+    background:#151417;
+  }
+  .life-card:hover,.life-card:focus-within{flex:4.4; transform:translateY(-2px);}
+  .life-card img{width:100%; height:100%; object-fit:cover; filter:grayscale(1) contrast(1.05); opacity:.58; transition:filter .25s ease, opacity .25s ease;}
+  .life-card:hover img,.life-card:focus-within img{filter:grayscale(0) contrast(1.02); opacity:1;}
+  .life-card.charm img{object-position:50% 46%;}
+  .life-card::after{content:""; position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,.05), rgba(0,0,0,.72)); z-index:1;}
+  .life-copy{
+    position:absolute; z-index:2; left:18px; right:18px; bottom:18px;
+    color:white; opacity:0; transform:translateY(18px); transition:opacity .3s ease, transform .3s ease;
+  }
+  .life-card:hover .life-copy,.life-card:focus-within .life-copy{opacity:1; transform:translateY(0);}
+  .life-copy span{font-family:'Caveat',cursive; color:var(--accent); font-size:1.25rem;}
+  .life-copy h3{font-family:'Space Grotesk',sans-serif; font-size:1.35rem; margin:4px 0 6px;}
+  .life-copy p{font-size:.92rem; line-height:1.45; color:rgba(255,255,255,.82);}
+
+  .contact-card{
+    background:linear-gradient(150deg, var(--bg-card), var(--bg-soft));
+    border:1px solid var(--line); border-radius:24px; padding:46px 6vw;
+    display:grid; grid-template-columns:1fr 1fr; gap:48px; box-shadow:var(--shadow);
+  }
+  .contact-left h2{font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:clamp(2rem,4vw,3rem); line-height:1.1; margin-bottom:20px;}
+  .contact-left p{color:var(--text-dim); font-size:1.02rem; line-height:1.7; max-width:46ch; margin-bottom:28px;}
+  .contact-links{display:flex; flex-direction:column; gap:14px;}
+  .contact-links a{display:flex; align-items:center; gap:12px; font-size:1rem; color:var(--text); padding:12px 0; border-bottom:1px solid var(--line); transition:color .2s;}
+  .contact-links a:hover{color:var(--accent);}
+  .contact-links .ico{width:20px; text-align:center; color:var(--accent); font-weight:700;}
+  form.contact-form{display:flex; flex-direction:column; gap:16px;}
+  .row2{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+  input,textarea{background:var(--bg-card); border:1px solid var(--line); border-radius:12px; padding:14px 16px; color:var(--text); font-family:'Inter',sans-serif; font-size:.95rem; outline:none; transition:border-color .2s;}
+  input:focus,textarea:focus{border-color:var(--accent);}
+  textarea{resize:vertical; min-height:110px;}
+  .send-btn{background:var(--accent); color:#0F0F12; border:none; padding:15px; border-radius:12px; font-weight:700; font-size:.95rem; cursor:pointer; transition:transform .2s ease;}
+  .send-btn:hover{transform:translateY(-2px);}
+  footer.foot{text-align:center; padding:38px 6vw 30px; color:var(--text-dim); font-size:.86rem;}
+  footer.foot strong{color:var(--text);}
+
+  @media (max-width:900px){
+    section{padding:82px 6vw 58px;}
+    header{align-items:flex-start;}
+    nav ul{display:none;}
+    .about{grid-template-columns:1fr; gap:34px;}
+    .about-photo{max-width:340px;}
+    .projects-grid{grid-template-columns:1fr;}
+    .project-card.wide{grid-column:span 1;}
+    .contact-card{grid-template-columns:1fr; padding:34px 6vw;}
+    .exp-item{grid-template-columns:1fr; gap:10px;}
+    .row2{grid-template-columns:1fr;}
+    .beyond-shell{padding:18px;}
+    .beyond-intro{display:block;}
+    .beyond-intro p{margin-top:10px;}
+    .life-stack{display:grid; grid-template-columns:1fr; height:auto;}
+    .life-card,.life-card:hover{height:240px;}
+    .life-copy{opacity:1; transform:none;}
+    .hero-doodle.one{right:0; top:10%; transform:scale(.78);}
+    .hero-doodle.two{left:0; bottom:4%; transform:scale(.72);}
+  }
+
+  [data-reveal]{opacity:0; transform:translateY(24px); transition:opacity .7s ease, transform .7s ease;}
+  [data-reveal].in{opacity:1; transform:translateY(0);}
+</style>
+</head>
+<body>
+
+<header>
+  <a class="logo" href="#top">d<span>.</span>rsh</a>
+  <nav aria-label="Primary navigation">
+    <ul>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#beyond">Beyond 9-5</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+  <div class="nav-actions">
+    <button class="theme-btn" type="button" aria-label="Switch to light mode" title="Switch theme"><span>&#9728;</span></button>
+    <button class="copy-email-btn" type="button" data-email="dharshu.pd21@gmail.com">Copy my email</button>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <div class="hero-grain"></div>
+  <div class="hero-inner">
+    <div class="hero-tag"><span class="dot"></span> Bangalore, India | Product Designer</div>
+    <h1 class="hero-headline">
+      Hi, I'm dharshu &mdash; I design intuitive digital experiences.
+      <svg class="hero-doodle one" viewBox="0 0 80 80" aria-hidden="true">
+        <path d="M40 8 C44 26 52 35 72 40 C52 45 44 54 40 72 C36 54 28 45 8 40 C28 35 36 26 40 8 Z"/>
+        <path d="M64 12 L68 4 M68 22 L76 18 M62 62 L70 70"/>
+      </svg>
+      <svg class="hero-doodle two" viewBox="0 0 70 70" aria-hidden="true">
+        <path d="M14 48 L4 54 M20 58 L14 68 M48 10 C51 22 57 28 68 31 C57 34 51 40 48 52 C45 40 39 34 28 31 C39 28 45 22 48 10 Z"/>
+      </svg>
+    </h1>
+    <p class="hero-sub">I design fintech and AI product workflows that make complex information easier to understand, act on, and trust. My focus is on creating calm, usable interfaces that feel clear, useful, and human.</p>
+    <div class="hero-cta-row">
+      <a href="#work" class="btn-primary">See my work</a>
+      <a href="#contact" class="btn-secondary">Say hello</a>
+    </div>
+  </div>
+  <div class="scroll-hint"><div class="line"></div> scroll</div>
+</section>
+
+<div class="marquee-wrap">
+  <div class="marquee" aria-hidden="true">
+    <span>UX Design</span><span class="hi">✦</span><span>UI Design</span><span class="hi">✦</span><span>Design Systems</span><span class="hi">✦</span><span>Fintech UX</span><span class="hi">✦</span><span>Prototyping</span><span class="hi">✦</span>
+    <span>UX Design</span><span class="hi">✦</span><span>UI Design</span><span class="hi">✦</span><span>Design Systems</span><span class="hi">✦</span><span>Fintech UX</span><span class="hi">✦</span><span>Prototyping</span><span class="hi">✦</span>
+  </div>
+</div>
+
+<section id="about">
+  <div class="about" data-reveal>
+    <div class="about-photo">
+      <img src="assets/darshu-portrait.jpeg" alt="Darshu smiling outdoors">
+      <span class="tag-chip">that's me!</span>
+    </div>
+    <div class="about-text">
+      <span class="eyebrow">and this is my story...</span>
+      <h2>A product designer who loves thoughtful, useful interfaces.</h2>
+      <p>I first got interested in design by noticing how apps and websites looked, felt, and guided people from one step to the next. That curiosity slowly turned into a craft: understanding what makes a product feel simple, polished, and easy to use.</p>
+      <p>At <strong>73 Strings</strong>, I design AI-powered fintech experiences for complex private-market data, dashboards, and decision workflows. I work across UX, UI, prototyping, design systems, and cross-functional collaboration.</p>
+      <p>I care about crisp labels, honest empty states, scalable components, and the small details that help people trust what they are seeing.</p>
+      <div class="quote-note">"Clarity is usually hiding inside the chaos. I just like finding it."</div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div data-reveal>
+    <div class="skills-head">
+      <div>
+        <span class="eyebrow">further -</span>
+        <h2>the skills I bring to the table</h2>
+      </div>
+    </div>
+    <div class="pill-grid">
+      <span class="pill lead">Product Design</span>
+      <span class="pill lead">UX Design</span>
+      <span class="pill lead">UI Design</span>
+      <span class="pill">Design Systems</span>
+      <span class="pill">Interaction Design</span>
+      <span class="pill">Wireframing</span>
+      <span class="pill">Prototyping</span>
+      <span class="pill">Usability Testing</span>
+      <span class="pill">User Research</span>
+      <span class="pill">Fintech UX</span>
+      <span class="pill">Data-heavy Interfaces</span>
+      <span class="pill">Accessibility</span>
+      <span class="pill">Stakeholder Communication</span>
+      <span class="pill">Cross-functional Collaboration</span>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div data-reveal>
+    <span class="eyebrow">where I've worked</span>
+    <h2 class="section-title" style="margin-bottom:10px;">Experience</h2>
+  </div>
+  <div data-reveal>
+    <div class="exp-item">
+      <div class="exp-date">2023 - Present</div>
+      <div>
+        <div class="exp-role">Product / UX Designer</div>
+        <span class="exp-company">73 Strings</span>
+        <p class="exp-desc">Designing AI-powered financial intelligence products for alternative investment teams. I translate complex private-market data, valuation workflows, and monitoring tasks into clear interfaces, reusable patterns, and practical product decisions.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="work">
+  <div data-reveal>
+    <span class="eyebrow">there are a few -</span>
+    <h2 class="section-title" style="margin-bottom:30px;">Other explorations</h2>
+  </div>
+  <div class="projects-grid" data-reveal>
+    <div class="project-card wide">
+      <div class="blob" style="background:var(--accent-2);"></div>
+      <span class="project-tag">Fintech | Web App</span>
+      <h3>direct. - money lending app</h3>
+      <p>A lending app concept designed to help small business owners explore loan options, compare lenders, and move from discovery to connection with less friction and more confidence.</p>
+      <a class="project-link" href="https://www.behance.net/gallery/170733731/Direct-Fintech-Web-App" target="_blank" rel="noopener">View case study</a>
+    </div>
+    <div class="project-card">
+      <div class="blob" style="background:var(--accent-3);"></div>
+      <span class="project-tag">UX Case Study</span>
+      <h3>Problem framing to product flow</h3>
+      <p>A UX case study that walks through research signals, user needs, information structure, and the design decisions behind the final experience.</p>
+      <a class="project-link" href="https://www.behance.net/gallery/167612069/UX-Case-Study" target="_blank" rel="noopener">View case study</a>
+    </div>
+    <div class="project-card">
+      <div class="blob" style="background:var(--accent);"></div>
+      <span class="project-tag">Education | Mobile</span>
+      <h3>Learning app experience</h3>
+      <p>A mobile learning experience designed around focus, progress, and simple repeatable flows across lessons and daily study habits.</p>
+      <a class="project-link" href="https://www.behance.net/gallery/167611465/iOS-Presentation-Education" target="_blank" rel="noopener">View iOS work</a>
+    </div>
+    <div class="project-card">
+      <div class="blob" style="background:var(--accent-2);"></div>
+      <span class="project-tag">Education | Android</span>
+      <h3>Platform-aware Android design</h3>
+      <p>The Android version of the education app, adapted for platform expectations while keeping the learning journey consistent and easy to scan.</p>
+      <a class="project-link" href="https://www.behance.net/gallery/167603743/Android-Presentation-Education" target="_blank" rel="noopener">View Android work</a>
+    </div>
+    <div class="project-card">
+      <div class="blob" style="background:var(--accent-3);"></div>
+      <span class="project-tag">Education | Web</span>
+      <h3>Responsive web presentation</h3>
+      <p>A web extension of the education product, shaped for larger screens without losing the clarity of the mobile experience.</p>
+      <a class="project-link" href="https://www.behance.net/gallery/167602985/Website-presentation-Education-app" target="_blank" rel="noopener">View web work</a>
+    </div>
+  </div>
+  <div style="margin-top:34px; text-align:center;" data-reveal>
+    <a class="btn-secondary" href="https://www.behance.net/priyadharshini65" target="_blank" rel="noopener">See everything on Behance</a>
+  </div>
+</section>
+
+<section id="beyond">
+  <div data-reveal>
+    <span class="eyebrow">beyond my 9-5</span>
+    <div class="beyond-shell">
+      <div class="beyond-intro">
+        <h2>where I dive deeper into the things that keep me curious.</h2>
+        <p>Food, travel, tiny handmade charms, face painting, doodles, and little visual experiments that keep the creative muscle awake.</p>
+      </div>
+      <div class="life-stack" aria-label="Personal interests gallery">
+        <article class="life-card charm" tabindex="0">
+          <img src="assets/charm-making.jpeg" alt="Handmade elephant charm">
+          <div class="life-copy">
+            <span>that's me</span>
+            <h3>Writing ads and making charms</h3>
+            <p>I like playful ideas, tiny handmade things, and giving small objects a little personality.</p>
+          </div>
+        </article>
+        <article class="life-card" tabindex="0">
+          <img src="assets/food-exploring.jpeg" alt="Sushi on a table">
+          <div class="life-copy">
+            <span>that's me</span>
+            <h3>Exploring food</h3>
+            <p>New places usually start with a menu. I love trying food that feels like a small story.</p>
+          </div>
+        </article>
+        <article class="life-card" tabindex="0">
+          <img src="assets/lake-travel.jpeg" alt="Darshu looking at a lake and mountains">
+          <div class="life-copy">
+            <span>that's me</span>
+            <h3>Chasing nature</h3>
+            <p>Travel helps me reset, especially when there is water, mist, and a little quiet.</p>
+          </div>
+        </article>
+        <article class="life-card" tabindex="0">
+          <img src="assets/face-painting.jpeg" alt="Darshu with face painting">
+          <div class="life-copy">
+            <span>that's me</span>
+            <h3>Painting for fun</h3>
+            <p>Doodles, face paint, color, and tiny experiments are my favorite low-pressure creative playground.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="contact-card" data-reveal>
+    <div class="contact-left">
+      <span class="eyebrow">now that you know me -</span>
+      <h2>Let's make something clear, useful, and lovely.</h2>
+      <p>I am open to product design opportunities, thoughtful collaborations, and conversations about UX, fintech, AI interfaces, and design systems.</p>
+      <div class="contact-links">
+        <a href="mailto:dharshu.pd21@gmail.com"><span class="ico">@</span> dharshu.pd21@gmail.com</a>
+        <a href="https://www.linkedin.com/in/priya-dharshini-08a87b271/" target="_blank" rel="noopener"><span class="ico">in</span> linkedin.com/in/priya-dharshini-08a87b271</a>
+        <a href="https://www.behance.net/priyadharshini65" target="_blank" rel="noopener"><span class="ico">Be</span> behance.net/priyadharshini65</a>
+      </div>
+    </div>
+    <form class="contact-form" onsubmit="event.preventDefault(); window.location.href='mailto:dharshu.pd21@gmail.com?subject=Hello Darshu from ' + encodeURIComponent(document.getElementById('cname').value) + '&body=' + encodeURIComponent(document.getElementById('cmsg').value + ' - reply to: ' + document.getElementById('cemail').value);">
+      <div class="row2">
+        <input id="cname" type="text" placeholder="Your name" required>
+        <input id="cemail" type="email" placeholder="Your email" required>
+      </div>
+      <textarea id="cmsg" placeholder="Tell me about your project..." required></textarea>
+      <button class="send-btn" type="submit">Send message</button>
+    </form>
+  </div>
+</section>
+
+<footer class="foot">
+  Designed and built with care by <strong>Priya Darshini</strong> | d.rsh | 2026
+</footer>
+
+<script>
+  const revealEls = document.querySelectorAll('[data-reveal]');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach((entry)=>{ if(entry.isIntersecting){ entry.target.classList.add('in'); } });
+  }, {threshold:0.12});
+  revealEls.forEach((el)=>io.observe(el));
+
+  const themeButton = document.querySelector('.theme-btn');
+  const themeIcon = themeButton.querySelector('span');
+  themeButton.addEventListener('click', ()=>{
+    document.body.classList.toggle('light');
+    themeIcon.innerHTML = document.body.classList.contains('light') ? '&#9790;' : '&#9728;';
+    themeButton.setAttribute(
+      'aria-label',
+      document.body.classList.contains('light') ? 'Switch to dark mode' : 'Switch to light mode'
+    );
+  });
+
+  const copyEmailButton = document.querySelector('.copy-email-btn');
+  copyEmailButton.addEventListener('click', async ()=>{
+    const email = copyEmailButton.dataset.email;
+    try {
+      await navigator.clipboard.writeText(email);
+    } catch (error) {
+      const helper = document.createElement('textarea');
+      helper.value = email;
+      helper.setAttribute('readonly', '');
+      helper.style.position = 'fixed';
+      helper.style.opacity = '0';
+      document.body.appendChild(helper);
+      helper.select();
+      document.execCommand('copy');
+      helper.remove();
+    }
+    copyEmailButton.textContent = 'Email copied';
+    window.setTimeout(()=>{ copyEmailButton.textContent = 'Copy my email'; }, 1800);
+  });
+</script>
+</body>
+</html>
